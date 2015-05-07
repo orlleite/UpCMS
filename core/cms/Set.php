@@ -22,7 +22,7 @@ class ApplicationSet
 	{
 		global $UpCMS, $result;
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::SET_BEFORE_GET, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::SET_BEFORE_GET, NULL ) );
 		
 		$rel = @$_POST["rel"];
 		
@@ -31,7 +31,7 @@ class ApplicationSet
 		
 		$result->list = $list;
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::SET_AFTER_GET, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::SET_AFTER_GET, NULL ) );
 	}
 	
 	/**
@@ -45,13 +45,13 @@ class ApplicationSet
 	{
 		global $UpCMS, $result;
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::SET_BEFORE_SET, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::SET_BEFORE_SET, NULL ) );
 		
 		$rel = @$_POST["rel"];
 		
 		include_once( $UpCMS->settings[$rel]->set );
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::SET_AFTER_SET, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::SET_AFTER_SET, NULL ) );
 	}
 }
 
