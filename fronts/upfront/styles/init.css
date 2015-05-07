@@ -1,0 +1,541 @@
+@charset "utf-8";
+/* CSS Document */
+
+* {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#747474;
+	padding:0;
+	margin:0;
+}
+
+a {
+	text-decoration:none;
+	font-weight:bold;
+	color:#C33333;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+img {
+	border:0;
+}
+
+html, body {
+	font-family:Arial, Helvetica, sans-serif;
+	background:#F6F6F6;
+	border-spacing:0;
+	color:#C33333;
+	height:100%;
+	margin:0;
+}
+
+h1 {
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size:24px;
+}
+
+input {
+	outline:none;
+}
+
+
+/* --- SCREENS --- */
+#white_screen {
+	position:fixed;
+	background:#F6F6F6;
+	height:100%;
+	width:100%;
+	z-index:10;
+	left:0;
+	top:0;
+}
+
+#dark_screen {
+	background:#000;
+	position:fixed;
+	display:none;
+	height:100%;
+	width:100%;
+	z-index:11;
+	opacity:0.5;
+	left:0;
+	top:0;
+}
+
+#loading_screen {
+	background:none;
+	position:fixed;
+	display:none;
+	height:100%;
+	width:100%;
+	z-index:11;
+	opacity:0;
+	left:0;
+	top:0;
+}
+
+#loading_screen div {
+	-webkit-box-shadow:0 0 15px #999;
+	-moz-box-shadow: 3px 3px 5px #999;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	
+	border: 1px solid #747474;
+	background:#E9E9E9;
+	position:fixed;
+	font-size:14px;
+	padding:5px;
+	left:48%;
+	top:50%;
+}
+
+#popbox_screen {
+	position:fixed;
+	background:#000;
+	height:100%;
+	width:100%;
+	z-index:10;
+	left:0;
+	top:0;
+}
+
+
+/* --- FOOTER --- */
+#footer {
+	position:absolute;
+	margin-top:-52px;
+	height:52px;
+	width:100%;
+	top:100%;
+}
+
+#footer .left {
+	background:url(../imgs/footer_bg.png);
+	margin-left:42px;
+	height:52px;
+	width:72px;
+	float:left;
+}
+
+#footer .center {
+	background:url(../imgs/footer_bg2.png);
+	margin:0 54px 0 114px;
+	font-size:12px;
+	color:#747474;
+	height:52px;
+}
+
+#footer .content {
+	padding:22px 0 0 20px;
+	float:left;
+}
+
+#footer .version {
+	margin-right:25px;
+	padding-top:22px;
+	text-align:right;
+	width:100px;
+	float:right;
+}
+
+#footer .right {
+	background:url(../imgs/footer_bg.png) -72px 0;
+	margin-right:-12px;
+	height:52px;
+	width:12px;
+	float:right;
+}
+
+
+/* --- LOGIN --- */
+#starting {
+	position:absolute;
+	height:100%;
+	width:100%;
+}
+
+#loginbox {
+	margin:-90px 0 0 -156px;
+	position:absolute;
+	overflow:hidden;
+	height:180px;
+	width:312px;
+	left:50%;
+	top:50%;
+}
+
+#loginbox h1 {
+	line-height:120%;
+	margin-left:3px;
+}
+
+#loginform {
+	background:url(../imgs/loginbox.png) no-repeat;
+	padding-top:20px;
+	height:110px;
+	width:310px;
+}
+
+#loginform label {
+	font-family:Arial, Helvetica, sans-serif;
+	padding-bottom:12px;
+	font-weight:bold;
+	font-size:12px;
+	color:#747474;
+	display:block;
+}
+
+#loginform label .field {
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	
+	border:#C6C6C6 solid 1px;
+	background:#F9F9F9;
+	display:block;
+	margin:0 0 12px 5px;
+	padding:6px;
+	height:16px;
+	width:200px;
+	float:left;
+}
+
+#loginform label .label {
+	padding:8px 0 0 15px;
+	display:block;
+	width:60px;
+	float:left;
+	text-align:right;
+}
+
+#loginform input[type=text], #loginform input[type=password] {
+	font-family:Arial, Helvetica, sans-serif;
+	background:none;
+	font-size:14px;
+	color:#747474;
+	border:none;
+	height:100%;
+	width:100%;
+}
+
+#loginform #checking {
+	margin:-1px 0 0 70px;
+	color:#C33333;
+	float:left;
+}
+
+#loginform input[type=checkbox] {
+	vertical-align:middle;
+}
+
+#loginform #login_button {
+	margin:-7px 15px 0 0;
+	font-weight:bold;
+	font-size:12px;
+	color:#C33333;
+	height:28px;
+	float:right;
+}
+
+#loginform #login_button:hover {
+	text-decoration:none;
+}
+
+#loginform #login_button span {
+	background:url(../imgs/icons_general.png) no-repeat 0 0;
+	display:inline-block;
+	vertical-align:-10px;
+	height:28px;
+	width:28px;
+}
+
+#lost_password {
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:12px;
+	color:#C33333;
+	float:right;
+	margin:5px;
+}
+
+
+/* --- ALERT BOX --- */
+.alert_box {
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	
+	background:#E9E9E9;
+	position:absolute;
+	color:#747474;
+	z-index:100;
+}
+
+.alert_box .icon {
+	background:url(../imgs/icons_box.png);
+	display:block;
+	margin:15px;
+	height:55px;
+	float:left;
+	width:55px;
+}
+
+.alert_box div {
+	margin-right:20px;
+	font-weight:bold;
+	max-width:300px;
+	font-size:12px;
+	float:right;
+}
+
+.alert_box h1 {
+	margin:15px 0 5px 0;
+	font-weight:bold;
+	font-size:18px;
+}
+
+.box_btn_container {
+	margin:10px 30px 10px 0 !important;
+	display:inline-block;
+	text-align:center;
+	width:100%;
+}
+
+.button {
+	display:inline-block;
+	cursor:pointer;
+	outline:none;
+}
+
+.button .left {
+	background:url(../imgs/alert_button_bg.png);
+	height:31px;
+	width:10px;
+	float:left;
+}
+
+.button .center {
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	background:url(../imgs/alert_button_bg2.png);
+	font-weight:bold;
+	font-size:12px;
+	color:#C33333;
+	padding:7px;
+	float:left;
+}
+
+.button .right {
+	background:url(../imgs/alert_button_bg.png) -10px 0;
+	height:31px;
+	width:10px;
+	float:left;
+}
+
+.button:hover {
+	text-decoration:none;
+}
+
+.button:hover .left {
+	background:url(../imgs/alert_button_bg.png) 0 -62px;
+}
+
+.button:hover .center {
+	background:url(../imgs/alert_button_bg2.png) 0 -65px;
+}
+
+.box_btn:hover .right, .button:hover .right {
+	background:url(../imgs/alert_button_bg.png) -10px -62px;
+}
+
+.button:active .left { 
+	background:url(../imgs/alert_button_bg.png) 0 -31px !important;
+}
+
+.button:active .center {
+	background:url(../imgs/alert_button_bg2.png) 0 -31px !important;
+	padding-top:8px !important;
+}
+
+.button:active .right {
+	background:url(../imgs/alert_button_bg.png) -10px -31px !important;
+}
+
+.add_button .center span {
+	background:url(../imgs/add_icon.png);
+	display:block;
+	height:16px;
+	width:10px;
+	margin:0;
+}
+
+
+/* --- SUCESS BOX --- */
+.sucess_box {
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	
+	background:#E9E9E9;
+	position:absolute;
+	color:#747474;
+	z-index:100;
+}
+
+.sucess_box .icon {
+	background:url(../imgs/icons_box.png) -55px 0;
+	display:block;
+	margin:15px;
+	height:55px;
+	float:left;
+	width:55px;
+}
+
+.sucess_box div {
+	margin-right:20px;
+	font-weight:bold;
+	max-width:300px;
+	font-size:12px;
+	float:right;
+}
+
+.sucess_box h1 {
+	margin:15px 0 5px 0;
+	font-weight:bold;
+	font-size:18px;
+}
+
+/* --- SUCESS BOX --- */
+.confirm_box {
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	
+	background:#E9E9E9;
+	position:absolute;
+	color:#747474;
+	z-index:100;
+	display:block;
+}
+
+.confirm_box .icon {
+	background:url(../imgs/icons_box.png) -110px 0;
+	display:block;
+	margin:15px;
+	height:55px;
+	float:left;
+	width:55px;
+}
+
+.confirm_box div {
+	margin-right:20px;
+	font-weight:bold;
+	max-width:300px;
+	font-size:12px;
+	float:left;
+}
+
+.confirm_box h1 {
+	margin:15px 0 5px 0;
+	font-weight:bold;
+	font-size:18px;
+}
+
+
+/* --- INPUT BOX --- */
+.input_box {
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	
+	background:#E9E9E9;
+	position:fixed;
+	color:#747474;
+	z-index:100;
+}
+
+.input_box .icon {
+	background:url(../imgs/icons_box.png) -110px 0;
+	display:block;
+	margin:15px;
+	height:55px;
+	float:left;
+	width:55px;
+}
+
+.input_box div {
+	margin-right:20px;
+	font-weight:bold;
+	max-width:300px;
+	font-size:12px;
+	float:right;
+}
+
+.input_box h1 {
+	margin:15px 0 5px 0;
+	font-weight:bold;
+	font-size:18px;
+}
+
+.input_box .field {
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	
+	border:#C6C6C6 solid 1px;
+	background:#F9F9F9;
+	display:block;
+	padding:6px;
+	height:16px;
+	width:210px;
+}
+
+input[type=text], input[type=password], textarea {
+	font-family:Arial, Helvetica, sans-serif;
+	background:none;
+	font-size:14px;
+	color:#747474;
+	border:none;
+	height:100%;
+	width:100%;
+}
+
+textarea {
+	height:150px;
+}
+
+/* --- LOADING BOX --- */
+#loading {
+	background:url(../imgs/loginbox.png) no-repeat;
+	padding-top:30px;
+	height:110px;
+	width:310px;
+	display:block;
+	opacity:0;
+}
+
+#loading h1 {
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	text-align:center;
+	font-weight:bold;
+	font-size:18px;
+	color:#747474;
+	margin:0;
+}
+
+#progress {
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	
+	border:#C6C6C6 solid 1px;
+	background:#F9F9F9;
+	margin:10px 0 0 45px;
+	padding:5px;
+	height:18px;
+	width:210px;
+}
+
+#loaded {
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	
+	background:#83161E url(../imgs/loading_progress.png);
+	height:100%;
+	width:0%;
+}

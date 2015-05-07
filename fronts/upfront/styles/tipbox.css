@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* CSS Document */
+
+.ballon {
+	position:absolute;
+	z-index:1;
+}
+
+.ballon > .top > .left {
+	background:url(../imgs/ballon_top_bg.png);
+	display:inline-block;
+	height:11px;
+	float:left;
+	width:10px;
+}
+
+.ballon > .top > .center {
+	background:url(../imgs/ballon_top_bg2.png);
+	margin:0 10px;
+	height:11px;
+}
+
+.ballon > .top > .center > .right {
+	background:url(../imgs/ballon_top_bg.png) 10px 0;
+	margin-right:-10px;
+	float:right;
+	height:11px;
+	width:10px;
+}
+
+.ballon > .content > .left {
+	background:url(../imgs/ballon_content_bg.png) repeat-y;
+}
+
+.ballon > .content > .left > .right {
+	background:url(../imgs/ballon_content_bg2.png) repeat-y right;
+}
+
+.ballon > .content > .left > .right > .center {
+	margin:0 10px -73px 10px;
+	margin-bottom:-78px;
+	min-height:100px;
+	background:#FFF;
+	padding:2px 5px 0 5px;
+}
+
+.ballon > .content > .left > .right > .center > .value {
+	position:relative;
+}
+
+.ballon > .bottom {
+	margin-top:5px;
+}
+
+.ballon > .bottom > .left {
+	background:url(../imgs/ballon_bottom_bg.png);
+	display:inline-block;
+	min-height:83px;
+	float:left;
+	width:10px;
+}
+
+.ballon > .bottom > .center {
+	background:url(../imgs/ballon_bottom_bg2.png) repeat-x;
+	text-align:center;
+	min-height:83px;
+	margin:0 10px;
+}
+
+.ballon > .bottom > .center > .right {
+	background:url(../imgs/ballon_bottom_bg.png) 10px 0;
+	margin:0 -10px 0 0;
+	min-height:83px;
+	float:right;
+	width:10px;
+}
+
+.ballon > .bottom > .center > span {
+	background:url(../imgs/ballon_arrow.png);
+	display:inline-block;
+	margin-top:76px;
+	width:162px;
+	height:42px;
+}
+
+.ballon .right_menu {
+	padding:10px 8px 5px;
+	text-align:right;
+}

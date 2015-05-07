@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content>
+	<gui>
+		<box name="Publish" rel="publish" position="sidebar" />
+	</gui>
+	
+	<table name="News" rel="news" reltable="news" icon="news" permission="strict">
+		<field name="Title" rel="title" type="simpletext" quickedit="enabled" />
+		<field name="Date" rel="date" type="datetime" box="publish" quickedit="enabled" />
+		<field name="Content" rel="content" type="html" params="types(Language.images,'*.jpg;*.gif;*.png','png');min(200,200);max(500,350);" />
+		
+		<field name="Categories" type="categories" rel="categories" from="main_categories" position="sidebar" />
+		<field name="Tags" type="tags" rel="tags" from="main_tags" position="sidebar" />
+		
+		<field name="Status" rel="status" type="select" box="publish">
+			<option name="Published" value="published" />
+			<option name="Unpublished" value="unpublished" />
+			<option name="Privated" value="privated" />
+		</field>
+		
+		<field name="Gallery" rel="news_gallery" type="simpletable" reltable="news_gallery">
+			<field name="Image" rel="image" type="image" params="types(Language.images,'*.jpg;*.gif;*.png');decompress('*.zip');" quickedit="enabled" />
+			
+			<field name="Options" rel="options" type="options" quickedit="enabled">
+				<option name="Wallpaper" value="0" />
+				<option name="Animals" value="1" />
+				<option name="Colorfull" value="2" />
+				<option name="Abstract" value="3" />
+			</field>
+			
+			<field name="Subtitle" rel="subtitle" type="simpletext" quickedit="enabled" />
+		</field>
+	</table>
+	
+	<table name="Table Test" rel="relation" reltable="relation" icon="generic_list" permission="strict">
+		<field name="Title" rel="title" type="simpletext" quickedit="enabled" />
+		<field name="Content" rel="content" type="html" />
+		<field name="Status" rel="status" type="select" box="publish">
+			<option name="Published" value="published" />
+			<option name="Unpublished" value="unpublished" />
+			<option name="privado" value="privated" />
+		</field>
+		
+		<field name="Galeria" rel="news_gallery" type="simpletable" reltable="news_gallery">
+			<field name="Imagem" rel="image" type="image" quickedit="enabled" params="max(500,350);min(100,100);" />
+			<field name="Legenda" rel="subtitle" quickedit="enabled" type="simpletext" />
+		</field>
+	</table>
+	
+	<table name="Test" rel="test" reltable="test" icon="generic_edit">
+		<field name="SimpleText" rel="simpletext" type="simpletext" quickedit="enabled" />
+		<field name="Text" rel="text" type="text" quickedit="enabled" />
+		<field name="SimpleHTML" rel="simplehtml" type="simplehtml" />
+		<field name="HTML" rel="html" type="html" />
+		<field name="Image" rel="image" type="image" quickedit="enabled" />
+		<field name="DateTime" rel="datetime" type="datetime" quickedit="enabled" />
+		
+		<field name="File" rel="File" type="file" quickedit="enabled" />
+		
+		<field name="Options" rel="options" type="options" quickedit="enabled">
+			<option name="Tecnologia" value="0" />
+			<option name="Empreededorismo" value="1" />
+			<option name="Compras" value="2" />
+			<option name="Mundo bizarro" value="3" />
+		</field>
+		
+		<field name="Selects" rel="selects" type="select" quickedit="enabled">
+			<option name="publicado" value="published" />
+			<option name="não publicado" value="unpublished" />
+			<option name="privado" value="privated" />
+			<dynamic name="name" value="value" reltable="statuses" />
+		</field>
+		
+		<field name="SimpleText" rel="text2" type="color" quickedit="enabled" />
+	</table>
+	
+	<table name="Downloads" rel="download" reltable="download" icon="downloads">
+		<field name="Nome" rel="name" type="simpletext" quickedit="enabled" />
+		<field name="Imagem" rel="file" type="image" params="types(Language.images,'*.jpg;*.gif;*.png');min(200,200);max(300,300)" quickedit="enabled" />
+		<field name="Cor" rel="color" type="color" />
+	</table>
+</content>

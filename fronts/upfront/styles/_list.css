@@ -1,0 +1,149 @@
+@charset "utf-8";
+/* CSS Document */
+
+.table_list {
+	//-moz-border-radius-bottomright:4px;
+	//-moz-border-radius-bottomleft:4px;
+	//-moz-border-radius-topright:4px;
+	//-moz-border-radius-topleft:4px;
+	border:#244 solid 1px;
+	background:#e9f3f3;
+	width:100%;
+}
+
+.table_list th {
+	font-family:Arial, Helvetica, sans-serif;
+	padding:5px 2px 5px 5px;
+	vertical-align:text-top;
+	text-align:left;
+	font-size:13px;
+}
+
+.table_list thead tr th, .table_list tfoot tr th {
+	padding:2px 2px 2px 5px;
+	font-weight:normal;
+	background:#BDD;
+	font-size:12px;
+}
+
+.table_list tbody tr th {
+	border-bottom:#FFF solid 1px;
+}
+
+.table_list tbody tr th a {
+	text-decoration:none;
+	color:#000;
+}
+
+.table_list tbody tr th a:hover {
+	color:#666;
+}
+
+.table_list thead tr th {
+	border-bottom:#244 solid 1px;
+}
+
+.table_list tfoot tr th {
+	border-top:#244 solid 1px;
+}
+
+.quick_edit {
+	font-weight:normal;
+	visibility:hidden;
+	padding-top:2px;
+	font-size:11px;
+	color:#244;
+}
+
+#dark_screen {
+	position:absolute;
+	background:#000;
+	z-index:100;
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+}
+
+#white_screen {
+	position:absolute;
+	background:#FFF;
+	z-index:100;
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+}
+
+.alert_box {
+	font-family:Arial, Helvetica, sans-serif;
+	border:#244 solid 1px;
+	position:absolute;
+	text-align:center;
+	max-width:500px;
+	background:#DEE;
+	padding:10px;
+	z-index:101;
+	float:left;
+	left:30px;
+	top:30px;
+}
+
+.alert_box_btn {
+	text-decoration:none;
+	padding:0 2px 0 2px;
+	position:relative;
+	font-weight:bold;
+	line-height:180%;
+	background:#BDD;
+	border:inherit;
+	color:#000;
+	top:5px;
+}
+
+.alert_box_btn:hover {
+	background:#244;
+	color:#FFF;
+}
+
+.quick_editor {
+	width:100%;
+}
+
+.quick_editor div {
+	margin-right:10px;
+	margin-left:70px;
+}
+
+.quick_editor fieldset {
+	border:none;
+	float:left;
+	width:50%;
+	padding:0;
+	margin:0;
+}
+
+.quick_editor div span {
+	margin-left:-70px;
+	float:left;
+	width:70px;
+}
+
+.quick_editor div input {
+	width:100%;
+	float:left;
+}
+
+h2 {
+	font-size:16px;
+	padding-bottom:10px;
+}
+
+label {
+	float:left;
+	padding:10px 10px 10px 0;
+	width:100%;
+	clear:both;
+}
+
+-->
