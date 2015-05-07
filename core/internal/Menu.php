@@ -29,7 +29,7 @@ class Menu
 		self::$menu = array();
 		
 		// DISPATCH START EVENT //
-		$UpCMS->dispatchEvent( new Event( UpCMS::MENU_BEFORE_GET, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::MENU_BEFORE_GET, NULL ) );
 		
 		// Group Menu //
 		$menu = $UpCMS->config->gui;
@@ -42,13 +42,13 @@ class Menu
 			{
 				$tab = $UpCMS->config->table[$i];
 				$relMenu = (string)$tab["menu"];
-				$tarMenu = NULL;
+				$tarMenu = new stdClass();
 				
 				if( $relMenu != "" && count( $tarMenu = $menu->xpath('//menu[@rel=\''.$relMenu.'\']') ) )
 				{
-					if( !$addedMenu[$relMenu] )
+					if( !@$addedMenu[$relMenu] )
 					{
-						$temp = NULL;
+						$temp = new stdClass();
 						$temp->name	= $tarMenu[0]["name"];
 						$temp->rel	= $tarMenu[0]["rel"];
 						$temp->icon	= $tarMenu[0]["icon"];
@@ -59,7 +59,7 @@ class Menu
 						array_push( self::$menu, $temp );
 					}
 					
-					$temp = NULL;
+					$temp = new stdClass();
 					$temp->name = $UpCMS->config->table[$i]["name"];
 					
 					$id = @$UpCMS->config->table[$i]["id"];
@@ -73,7 +73,7 @@ class Menu
 				}
 				else
 				{
-					$temp = NULL;
+					$temp = new stdClass();
 					$temp->name	= $UpCMS->config->table[$i]["name"];
 					$temp->rel	= $UpCMS->config->table[$i]["rel"];
 					$temp->icon	= $UpCMS->config->table[$i]["icon"];
@@ -91,12 +91,12 @@ class Menu
 		}
 		
 		// DISPATCH BEFORE USERS EVENT //
-		$UpCMS->dispatchEvent( new Event( UpCMS::MENU_BEFORE_GET_USERS, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::MENU_BEFORE_GET_USERS, NULL ) );
 		
 		if( ( $UpCMS->user->ownwrite( "users" ) or $UpCMS->user->anyread( "users" ) )
 			&& $UpCMS->options->get( "upcms", "users_system" ) == "true" )
 		{
-			$temp = NULL;
+			$temp = new stdClass();
 			$temp->name	= $Language->users;
 			$temp->rel	= "system_users";
 			$temp->url	= "system_users/list";
@@ -114,7 +114,7 @@ class Menu
 		if( $UpCMS->user->application( "settings" ) &&
 		    $UpCMS->options->get( "upcms", "settings" ) == "true" )
 		{
-			$temp = NULL;
+			$temp = new stdClass();
 			$temp->name = $Language->settings;
 			$temp->rel = "system_settings";
 			$temp->url = "general/set";
@@ -132,7 +132,7 @@ class Menu
 			array_push( self::$menu, $temp );
 		}
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::MENU_AFTER_GET, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::MENU_AFTER_GET, NULL ) );
 		
 		return self::$menu;
 	}
@@ -152,6 +152,7 @@ class Menu
     */
 	public static function addMenu( $name, $rel, $url, $options )
 	{
+		$temp = new stdClass();
 		$temp->url = $url;
 		$temp->rel = $rel;
 		$temp->name = $name;

@@ -35,7 +35,7 @@ foreach( $styles as $css )
 
 global $upload_folder, $plugin_folder;
 
-$frontSettings = NULL;
+$frontSettings = new stdClass();
 $frontSettings->animationLevel = $UpCMS->options->get( "upfront", "animation_level" );
 $frontSettings->minimizeBox = $UpCMS->options->get( "upfront", "minimize_box" );
 $frontSettings->quickEdit = $UpCMS->options->get( "upfront", "quickedit" );
@@ -89,7 +89,7 @@ foreach( $javascripts as $js )
 				<div class="version"><?php if( $frontSettings->showUpVersion == "true" ) echo $Language->version." ".UP_APP_VERSION; ?></div>
 			</div>
 	</div>
-	
+
 	<div id="loginbox">
 		<h1><?php echo UP_APP_NAME ?></h1>
 		<form id="loginform" method="post" action="">
@@ -99,7 +99,7 @@ foreach( $javascripts as $js )
 			<input type="submit" style="display:none" />
 		</form>
 		<a id="lost_password" href="#"><?php echo $Language->lostYourPassword ?></a>
-		
+
 		<div id="loading">
 			<h1><?php echo $Language->loading ?></h1>
 			<div id="progress"><div id="loaded"></div></div>
@@ -137,15 +137,15 @@ function loadCMS()
 		{
 			Animation.hideStarting( startCMS );
 		}
-		
+
 		Animation.preloaderProgress( 1, func );
 	}
-	
+
 	$( "#loginform" ).remove();
 	$( "#lost_password" ).remove();
-	
+
 	Animation.showPreloader();
-	
+
 	var scripts = [
 		"<?php echo UP_FRONT_FOLDER ?>js/tinymce/jquery.tinymce.js",
 		"<?php echo UP_FRONT_FOLDER ?>js/swfobject.js",
@@ -167,16 +167,16 @@ function loadCMS()
 		"<?php echo UP_FRONT_FOLDER ?>js/validator.js",
 		"?Login::getInitScript"
 	];
-	
+
 	var images = [
 		"<?php echo UP_FRONT_FOLDER ?>/imgs/loginbox.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/loading_progress.png"
-		
+
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/add_icon.png"
-		
+
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/alert_button_bg.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/alert_button_bg2.png"
-		
+
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/ballon_arrow.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/ballon_bottom_bg.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/ballon_bottom_bg2.png"
@@ -184,7 +184,7 @@ function loadCMS()
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/ballon_content_bg2.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/ballon_top_bg.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/ballon_top_bg2.png"
-		
+
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/box_top_bg.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/box_top_bg2.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/box_buttons.png"
@@ -194,16 +194,16 @@ function loadCMS()
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/box_bottom_action_bg2.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/box_bottom_option_bg.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/box_bottom_option_bg2.png"
-		
+
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/footer_bg.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/footer_bg2.png"
-		
+
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/icons_box.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/icons_menu.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/icons_title.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/icons_button.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/icons_general.png"
-		
+
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/menu_bg.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/menu_bg2.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/order_arrow.png"
@@ -211,25 +211,25 @@ function loadCMS()
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/menu_separate.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/paginate_arrow.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/min_max_button.png"
-		
+
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/popbox_top_bg.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/popbox_top_bg2.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/popbox_bottom_bg.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/popbox_bottom_bg2.png"
-		
+
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/remove_icon.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/red_button_bg.png"
-		
+
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/slider_bottom_bg.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/slider_bottom_bg2.png"
-		
+
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/top_bg.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/top_bg2.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/table_bg.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/undefined.png"
 		,"<?php echo UP_FRONT_FOLDER ?>/imgs/submenu_arrow.png"
 	];
-	
+
 	loadScriptsAndImages( scripts, images, Animation.preloaderProgress, complete );
 }
 
@@ -250,12 +250,12 @@ function init()
 			$( "#starting input[name=\"loginsubmit\"" ).removeAttr( "disabled" ).val( Language.log );
 		}
 	}
-	
+
 	var validator = function()
 	{
 		var user = $( "#starting input[name=\"username\"]" );
 		var pass = $( "#starting input[name=\"password\"]" );
-		
+
 		if( user.val() == "" )
 		{
 			alertBox( Language.ops, Language.typeUser );
@@ -271,10 +271,10 @@ function init()
 			user.val( "" );
 			pass.val( "" );
 		}
-		
+
 		return false;
 	}
-	
+
 	var func = function( data )
 	{
 		if( data.status == "true" )
@@ -291,16 +291,16 @@ function init()
 			Animation.hideWhiteScreen();
 		}
 	}
-	
+
 	$.get( "?Login::logged", {}, func, "json" );
 }
 
 function addressChangeHandler( event )
 {
 	event = event || { path:SWFAddress.getValue() };
-	
+
 	$( "#footer" ).css( { position:"static" } );
-	
+
 	if( event.path == "/" )
 	{
 		home.show();
@@ -308,13 +308,13 @@ function addressChangeHandler( event )
 	else
 	{
 		var t = event.path.split( "/" );
-		
+
 		if( t[2] == "list" && t.length >= 3 )
 		{
 			var params = { };
 			for( var i = 3; i < t.length; i++ )
 			{
-				if( !Number( t[i] ) ) 
+				if( !Number( t[i] ) )
 				{
 					t[i] = t[i].toLowerCase();
 					if( t[i] == "asc" || t[i] == "desc" ) params.direction = t[i];
@@ -326,7 +326,7 @@ function addressChangeHandler( event )
 				}
 				else params.page = t[i];
 			}
-			
+
 			lister.show( t[1], params );
 		}
 		else if( t[2] == "add" && t.length == 3 )
@@ -342,7 +342,7 @@ function addressChangeHandler( event )
 			setter.show( t[1] );
 		}
 	}
-	
+
 	quicker.addressHandler();
 }
 
@@ -353,20 +353,20 @@ function logout()
 		$( "body" ).html( "<div id=\"white_screen\"></div><div id=\"popbox_screen\"></div><div id=\"dark_screen\"></div><div id=\"editer_screen\"></div><div id=\"starting\"><div id=\"footer\"><div class=\"left\"></div><div class=\"center\"><div class=\"content\"></div><div class=\"right\"></div><div class=\"version\"><?php if( $frontSettings->showUpVersion == "true" ) echo $Language->version." ".UP_APP_VERSION; ?></div></div></div><div id=\"loginbox\"><h1><?php echo UP_APP_NAME ?></h1><form id=\"loginform\" method=\"post\" action=\"\"><label><span class=\"label\"><?php echo $Language->user ?>:</span><span class=\"field\"><input name=\"username\" type=\"text\" /></span></label><label><span class=\"label\"><?php echo $Language->password ?>:</span><span class=\"field\"><input name=\"password\" type=\"password\" /></span></label><label id=\"checking\"><input type=\"checkbox\" /> <?php echo $Language->rememberMe ?></label><a id=\"login_button\" href=\"javascript:;\" onclick=\"$('#loginform').submit()\"><span></span><?php echo $Language->login ?></a><input type=\"submit\" style=\"display:none\" /></form><a id=\"lost_password\" href=\"#\"><?php echo $Language->lostYourPassword ?></a><div id=\"loading\"><h1><?php echo $Language->loading ?></h1><div id=\"progress\"><div id=\"loaded\"></div></div></div></div></div>" );
 		init();
 	}
-	
+
 	var func = function( data )
 	{
 		Animation.hideWhiteScreen( func2 );
 	}
-	
+
 	$.get( "?Login::logout", {}, func, "json" );
 }
 
 function startCMS()
 {
-	<?php 
+	<?php
 	$time = date("Hi");
-	
+
 	if( $time >= 1800 )
 		$time = $Language->evening;
 	else if( $time >= 1200 )
@@ -376,15 +376,15 @@ function startCMS()
 	else
 		$time = $Language->aftermoon;
 	?>;
-	
-	$( "body" ).append( "<div id=\"editer_container\"></div><div id=\"popbox_container\"></div><div id=\"wrap\"><div id=\"top\"><div class=\"left\"></div><div class=\"center\"><div class=\"content\"><a href=\"<?php echo UP_APP_URL ?>\" target=\"_blank\"><h1><?php echo UP_APP_NAME ?></h1></a><span><?php echo $time ?>, <a href=\"#/system_users/" + userid + "/edit\">" + displayname + "</a> <span class=\"general_icon icon_help\"></span><a href=\"http://upcms.net/\"><?php echo $Language->help ?></a> <span class=\"general_icon icon_logout\"></span><a href=\"javascript:logout();\"><?php echo $Language->logout ?></a></span></div><div class=\"right\"></div></div></div><div id=\"container\"><div id=\"menu\"><div class=\"background\"><div class=\"top\"></div><div class=\"middle\"></div><div class=\"bottom\"></div></div><div class=\"content\"><span class=\"home_btn\" ><span class=\"icon\"></span><a href=\"#\"><?php echo $Language->home ?></a></span></div></div><div id=\"main_content\"></div></div><br style=\"clear:both\" /></div>" );
+
+	$( "body" ).append( "<div id=\"editer_container\"></div><div id=\"popbox_container\"></div><div id=\"wrap\"><div id=\"top\"><div class=\"left\"></div><div class=\"center\"><div class=\"content\"><a href=\"<?php echo UP_APP_URL ?>\" target=\"_blank\"><h1><?php echo UP_APP_NAME ?></h1></a><span><?php echo $time ?>, <a href=\"#/system_users/" + userid + "/edit\">" + displayname + "</a>  <span class=\"general_icon icon_logout\"></span><a href=\"javascript:logout();\"><?php echo $Language->logout ?></a></span></div><div class=\"right\"></div></div></div><div id=\"container\"><div id=\"menu\"><div class=\"background\"><div class=\"top\"></div><div class=\"middle\"></div><div class=\"bottom\"></div></div><div class=\"content\"><span class=\"home_btn\" ><span class=\"icon\"></span><a href=\"#\"><?php echo $Language->home ?></a></span></div></div><div id=\"main_content\"></div></div><br style=\"clear:both\" /></div>" );
 	$( "body" ).append( $( "#footer" ) );
 	Animation.showWhiteScreen();
 	Animation.hideWhiteScreen();
 	$( "#starting" ).remove();
-	
+
 	startMenu();
-	
+
 	home = new Home();
 	setter = new Setter();
 	lister = new Lister();
@@ -395,15 +395,15 @@ function startCMS()
 	uploader = new Uploader();
 	inserter = new Inserter();
 	imager = new Imager();
-	
+
 	Animation.hideWhiteScreen();
-	
+
 	$( ".table_list tbody tr" ).mouseover( lister.tableOverHandler );
 	$( ".table_list tbody tr" ).mouseout( lister.tableOutHandler );
-	
+
 	$( "#popbox_screen" ).css( "opacity", 0 );
 	hideLoadingScreen();
-	
+
 	$( "#main_content" ).css( "min-height", ( $( "#menu" ).height() + 100 ) + "px");
 	SWFAddress.addEventListener( SWFAddressEvent.CHANGE, addressChangeHandler );
 	addressChangeHandler();

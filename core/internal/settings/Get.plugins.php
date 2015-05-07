@@ -16,12 +16,12 @@ global $Language, $UpCMS, $debugging;
 $list->name = $Language->pluginsSettings;
 
 // LIST //
-$n = new stdClass();
+$n = NULL;
 $n->columns->name->width = "40%";
 $n->columns->name->name = $Language->pluginName;
 
 // Plugin ON-OFF //
-$f = new stdClass();
+$f = NULL;
 $f->name = "";
 $f->value = "on";
 $f->type = "lonoff";
@@ -30,7 +30,7 @@ $f->options->off = $Language->pluginOff;
 $n->columns->name->fields->activate = $f;
 
 // Plugin Delete //
-$f = new stdClass();
+$f = NULL;
 $f->type = "llink";
 $f->name = $Language->pluginUninstall;
 $n->columns->name->fields->delete = $f;
@@ -40,12 +40,12 @@ $n->columns->description->name = $Language->pluginDescription;
 $n->columns->description->width = "60%";
 
 // Author //
-$f = new stdClass();
+$f = NULL;
 $f->type = "llabel";
 $n->columns->description->fields->author = $f;
 
 // Version //
-$f = new stdClass();
+$f = NULL;
 $f->type = "llabel";
 $n->columns->description->fields->version = $f;
 
@@ -54,7 +54,7 @@ $plugins = PluginManager::alist();
 foreach( $plugins as $k => $p )
 {
 	// Items //
-	$i = new stdClass();
+	$i = NULL;
 	$i->name->activate = $p->working ? "on" : "off";
 	$i->name->delete = "delete";
 	$i->name->content = $p->name;

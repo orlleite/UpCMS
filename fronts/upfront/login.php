@@ -35,7 +35,7 @@ class ViewLogin
 		
 		foreach( $UpCMS->menu as $b )
 		{
-			echo "	addLinkMenu( \"".$b->rel."\", \"".$b->name."\", \"".( strpos( $b->url, "ext://" ) === 0 ? substr( $b->url, 6 ) : "#/".$b->url )."\", \"".$b->icon."\" );\n";
+			echo "	addLinkMenu( \"".$b->rel."\", \"".$b->name."\", \"".( strpos( $b->url, "ext://" ) === 0 ? substr( $b->url, 6 ) : "#/".$b->url )."\", \"".@$b->icon."\" );\n";
 			if( isset( $b->options ) ) foreach( $b->options as $s ) echo "		addSubMenu( \"".$b->rel."\", \"".$s->name."\", \"".( strpos( $s->url, "ext://" ) === 0 ? substr( $s->url, 6 ) : "#/".$s->url )."\" );\n";
 		}
 		

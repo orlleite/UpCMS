@@ -146,7 +146,7 @@ class ApplicationEdit
 		global $UpCMS, $db_prefix, $up_prefix, $Language;
 		
 		// DISPATCH START EVENT //
-		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_BEFORE_GETNEW, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_BEFORE_GETNEW, NULL ) );
 		
 		// RELATION TABLE //
 		$relation = $_POST['rel'];
@@ -190,7 +190,7 @@ class ApplicationEdit
 		$table = $prefix.$target['reltable'];
 		$name = $target['name'];
 		$rel = $target['rel'];
-		$guis = NULL;
+		$guis = array();
 		
 		$t->name = 'id';
 		$fields['id'] = $t;
@@ -203,7 +203,7 @@ class ApplicationEdit
 		{
 			if( $n['box'] != '' )
 			{
-				$b = NULL;
+				$b = new stdClass();
 				if( strpos( $tboxs, (string) $n["box"] ) == false )
 				{
 					$tboxs .= $target[$i]["box"];
@@ -240,7 +240,7 @@ class ApplicationEdit
 					
 					if( $a->type == "select" or $a->type == "options" )
 					{
-						$a->options = NULL;
+						$a->options = array();
 						
 						if( isset( $f->dynamic ) ) $a->options = ApplicationEdit::getDynamicOptions( $prefix, $f->dynamic, $rel, $id, $a->options );
 						
@@ -277,7 +277,7 @@ class ApplicationEdit
 				
 				if( $t->type == "select" or $t->type == "options" or $t->type == "switch" )
 				{
-					$t->options = NULL;
+					$t->options = array();
 					
 					if( isset( $n->dynamic ) ) $t->options = ApplicationEdit::getDynamicOptions( $prefix, $n->dynamic, $rel, $id, $t->options );
 					
@@ -309,7 +309,7 @@ class ApplicationEdit
 		$result->icon	= (string) $target["icon"];
 		
 		// DISPATCH FINISH EVENT //
-		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_AFTER_GETNEW, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_AFTER_GETNEW, NULL ) );
 	}
 	
 	/**
@@ -334,7 +334,7 @@ class ApplicationEdit
 		global $UpCMS, $db_prefix, $up_prefix, $Language;
 		
 		// DISPATCH START EVENT //
-		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_BEFORE_GETEDIT, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_BEFORE_GETEDIT, NULL ) );
 		
 		// RELATION TABLE AND ID //
 		$id = $rid = $_POST['id'];
@@ -348,7 +348,8 @@ class ApplicationEdit
 			$rid = end( $temp );
 		}
 		
-		$relPermission = reset( explode( ".", $relation ) );
+		$a = explode( ".", $relation );
+		$relPermission = reset( $a );
 		
 		// IF RELATION IS A SYSTEM  TABLE (like users and groups) //
 		if( strpos( $relation, "system_" ) === 0 )
@@ -370,7 +371,7 @@ class ApplicationEdit
 		$permission = $target['permission'];
 		$name = $target['name'];
 		$rel = $relPermission;
-		$guis = NULL;
+		$guis = array();
 		
 		// GET PERMISSION //
 		if( $permission == 'strict' )
@@ -414,7 +415,7 @@ class ApplicationEdit
 		}
 		
 		// GET FIELDS AND GROUPS FROM TABLE //
-		$t = NULL;
+		$t = new stdClass();
 		$t->name = 'id';
 		$fields['id'] = $t;
 		$query = 'SELECT a.id';
@@ -424,20 +425,20 @@ class ApplicationEdit
 		{
 			if( $n["box"] != "" )
 			{
-				$b = NULL;
+				$b = new stdClass();
 				if( strpos( $tboxs, (string) $n["box"] ) == false )
 				{
 					$tboxs .= $n["box"];
 					$box = $UpCMS->config->xpath( "//gui/box[@rel='".$n["box"]."']" );
-					$b->position	= (string) $box[0]["position"];
-					$b->name		= (string) $box[0]["name"];
-					$guis[(string)$box[0]["rel"]] = $b;
+					$b->position	= (string) $box[0]->position;
+					$b->name		= (string) $box[0]->name;
+					$guis[(string)$box[0]->rel] = $b;
 				}
 			}
 			
 			if( $k == "group" )
 			{
-				$t = NULL;
+				$t = new stdClass();
 				$t->type	= "group";
 				$t->rel		= (string) $n["rel"];
 				$t->box		= (string) $n["box"];
@@ -449,7 +450,7 @@ class ApplicationEdit
 				
 				foreach( $n as $f )
 				{
-					$a = NULL;
+					$a = new stdClass();
 					$a->box		= (string) $f["box"];
 					$a->name	= (string) $f["name"];
 					$a->type	= (string) $f["type"];
@@ -462,7 +463,7 @@ class ApplicationEdit
 					
 					if( $a->type == "select" or $a->type == "options" )
 					{
-						$a->options = NULL;
+						$a->options = array();
 						
 						if( isset( $f->dynamic ) ) $a->options = ApplicationEdit::getDynamicOptions( $prefix, $f->dynamic, $rel, $rid, $a->options );
 						
@@ -488,7 +489,7 @@ class ApplicationEdit
 			}
 			else
 			{
-				$t = NULL;
+				$t = new stdClass();
 				$t->box		= (string) $n["box"];
 				$t->name	= (string) $n["name"];
 				$t->type	= (string) $n["type"];
@@ -501,11 +502,12 @@ class ApplicationEdit
 				
 				if( $t->type == "select" or $t->type == "options" or $t->type == "switch" )
 				{
-					$t->options = NULL;
+					$t->options = array();
 					
 					if( isset( $n->dynamic ) ) $t->options = ApplicationEdit::getDynamicOptions( $prefix, $n->dynamic, $rel, $rid, $t->options );
 					
-					foreach( $n->option as $opt ) $t->options[(string) $opt["value"]] = (string) $opt["name"];
+					foreach( $n->option as $opt ) 
+						$t->options[(string) $opt["value"]] = (string) $opt["name"];
 				}
 				elseif( $t->type == "categories" or $t->type == "tags" )
 				{
@@ -544,6 +546,7 @@ class ApplicationEdit
 		}
 		else
 		{
+			$result = new stdClass();
 			$result->save = true;
 			if( $permission == "strict" and $dbReturn["created_by"] != $UpCMS->user->info( "id" ) and !$UpCMS->user->anywrite( $relation ) )
 			{
@@ -561,12 +564,15 @@ class ApplicationEdit
 			
 			foreach( $fields as $k => $t )
 			{
-				if( $t->type == "group" )
+				if( @$t->type == "group" )
+				{
 					foreach( $t->fields as $a => $v )
 					{
 						if( $v->type != "password" ) $v->value = $dbReturn[$a];
 					}
-				else if( $t->type != "password" ) $t->value = $dbReturn[$k];
+				}
+				else if( @$t->type != "password" ) 
+					$t->value = $dbReturn[$k];
 			}
 			
 			
@@ -578,7 +584,7 @@ class ApplicationEdit
 			$result->icon	= (string) $target["icon"];
 		}
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_AFTER_GETEDIT, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_AFTER_GETEDIT, NULL ) );
 	}
 	
 	/**
@@ -603,7 +609,7 @@ class ApplicationEdit
 		global $UpCMS, $db_prefix, $up_prefix, $Language;
 		
 		// DISPATCH START EVENT //
-		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_BEFORE_SAVE, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_BEFORE_SAVE, NULL ) );
 		
 		// RELATION TABLE //
 		$relation = $_POST['rel'];
@@ -838,7 +844,7 @@ class ApplicationEdit
 			$result->error = $error;
 		}
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_AFTER_SAVE, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_AFTER_SAVE, NULL ) );
 	}
 	
 	/**
@@ -862,7 +868,7 @@ class ApplicationEdit
 		global $UpCMS, $db_prefix, $up_prefix, $Language;
 		
 		// DISPATCH START EVENT //
-		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_BEFORE_UPDATE, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_BEFORE_UPDATE, NULL ) );
 		
 		// RELATION TABLE //
 		$relation = $_POST['rel'];
@@ -1067,7 +1073,7 @@ class ApplicationEdit
 			$result->rel	= $relation;
 		}
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_AFTER_UPDATE, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_AFTER_UPDATE, NULL ) );
 	}
 	
 	/**
@@ -1091,7 +1097,7 @@ class ApplicationEdit
 		global $UpCMS, $db_prefix, $up_prefix;
 		
 		// DISPATCH START EVENT //
-		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_BEFORE_RESET_ARRAY, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_BEFORE_RESET_ARRAY, NULL ) );
 		
 		// RELATION TABLE //
 		$relation = $_POST['rel'];
@@ -1168,7 +1174,7 @@ class ApplicationEdit
 			$result->rel	= $relation;
 		}
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_AFTER_RESET_ARRAY, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_AFTER_RESET_ARRAY, NULL ) );
 	}
 	
 	/**
@@ -1192,7 +1198,7 @@ class ApplicationEdit
 		global $UpCMS, $db_prefix, $up_prefix, $Language;
 		
 		// DISPATCH START EVENT //
-		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_BEFORE_REMOVE, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_BEFORE_REMOVE, NULL ) );
 		
 		// RELATION TABLE //
 		$id = explode( ",", $_POST['id'] );
@@ -1267,7 +1273,7 @@ class ApplicationEdit
 			$result->rel	= $relation;
 		}
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_AFTER_REMOVE, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::EDIT_AFTER_REMOVE, NULL ) );
 	}
 }
 

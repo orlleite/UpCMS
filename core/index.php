@@ -16,7 +16,7 @@
 /**
  * Define Up!CMS Version
  */
-define( 'UP_APP_VERSION', '0.8.6.9' );
+define( 'UP_APP_VERSION', '0.8.6.3' );
 
 // Define o timezone local
 date_default_timezone_set('America/Halifax');
@@ -143,9 +143,11 @@ if( $UpCMS->user )
 {
 	if( $UpCMS->user->application( 'settings' ) )
 	{
+		$UpCMS->settings['general'] = new stdClass();
 		$UpCMS->settings['general']->get = 'core/internal/settings/Get.general.php';
 		$UpCMS->settings['general']->set = 'core/internal/settings/Set.general.php';
 		
+		$UpCMS->settings['plugins'] = new stdClass();
 		$UpCMS->settings['plugins']->get = 'core/internal/settings/Get.plugins.php';
 		$UpCMS->settings['plugins']->set = 'core/internal/settings/Set.plugins.php';
 	}
@@ -182,13 +184,16 @@ function __upcms()
 	$t = urldecode( $_SERVER['REQUEST_URI'] );
 	
 	// GET Class::Method //
-	$CURRENT_CALL = strpos( $t, "?" ) === false ? "" : end( explode( "?", $t, 2 ) );
+	$n = explode( "?", $t, 2 );
+	$CURRENT_CALL = strpos( $t, "?" ) === false ? "" : end( $n );
 	
 	$format = "index";
 	
 	$t = explode( "::", $CURRENT_CALL, 2 );
 	$CLASS = $t[0];
-	$METHOD = reset( explode( "&", isset( $t[1] ) ? $t[1] : "" ) );
+	$n = isset( $t[1] ) ? $t[1] : "";
+	$n = explode( "&", $n );
+	$METHOD = reset( $n );
 	
 	if( $CLASS )
 	{
@@ -204,9 +209,9 @@ function __upcms()
 		// Call ViewClass //
 		if( $format == "index" )
 		{
-			$UpCMS->dispatchEvent( new Event( UpCMS::BEFORE_FIRST_PAGE, $Index ) );
+			$UpCMS->dispatchEvent( new Event( UpCMS::BEFORE_FIRST_PAGE, NULL ) );
 			include_once( "./fronts/".UP_FRONT_NAME."/".$format.".php" );
-			$UpCMS->dispatchEvent( new Event( UpCMS::AFTER_FIRST_PAGE, $Index ) );
+			$UpCMS->dispatchEvent( new Event( UpCMS::AFTER_FIRST_PAGE, NULL ) );
 		}
 		else
 		{

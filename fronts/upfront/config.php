@@ -11,6 +11,7 @@
  */
 if( $UpCMS->user && $UpCMS->user->application( "settings" ) )
 {
+	$UpCMS->settings["front"] = new stdClass();
 	$UpCMS->settings["front"]->get = UP_FRONT_FOLDER."settings/Get.general.php";
 	$UpCMS->settings["front"]->set = UP_FRONT_FOLDER."settings/Set.general.php";
 }

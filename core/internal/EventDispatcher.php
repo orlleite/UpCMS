@@ -27,7 +27,7 @@ class EventDispatcher
     */
 	public function addEventListener( $type, $obj, $func )
 	{
-		if( $this->funcs[$type] == null )
+		if( @$this->funcs[$type] == null )
 		{
 			$this->funcs[$type] = array();
 			$this->objs[$type] = array();
@@ -81,7 +81,7 @@ class EventDispatcher
 	{
 		$t = $event->getType();
 		
-		if( $this->funcs[$t] )
+		if( @$this->funcs[$t] )
 		{
 			$c = count( $this->funcs[$t] );
 			for( $i = 0; $i < $c; $i++ )

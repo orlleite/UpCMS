@@ -69,7 +69,7 @@ class ApplicationList
 		global $UpCMS, $db_prefix, $up_prefix;
 		
 		// DISPATCH START EVENT //
-		$UpCMS->dispatchEvent( new Event( UpCMS::LIST_BEFORE_AUTHORS, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::LIST_BEFORE_AUTHORS, NULL ) );
 		
 		// RELATION TABLE //
 		$relation = $_POST['rel'];
@@ -141,7 +141,7 @@ class ApplicationList
 			return;
 		}
 		
-		$t = NULL;
+		$t = new stdClass();
 		$t->name = "id";
 		$fields["id"] = $t;
 		$query = "SELECT ".$up_prefix."users.username, ".$up_prefix."users.displayname, ( SELECT count( * ) FROM ".$table." WHERE ".$table.".created_by = ".$up_prefix."users.id ) AS created, ( SELECT count( * ) FROM ".$table." WHERE edited_by = ".$up_prefix."users.id ) AS edited, ( ( SELECT count( * ) FROM ".$table." WHERE ".$table.".created_by = ".$up_prefix."users.id ) + ( SELECT count( * ) FROM ".$table." WHERE edited_by = ".$up_prefix."users.id ) ) AS total FROM ".$up_prefix."users";
@@ -152,7 +152,7 @@ class ApplicationList
 		
 		$result->authors	= $dbReturn;
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::LIST_AFTER_AUTHORS, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::LIST_AFTER_AUTHORS, NULL ) );
 	}
 	
 	/**
@@ -181,7 +181,7 @@ class ApplicationList
 		global $UpCMS, $db_prefix, $up_prefix, $db_type;
 		
 		// DISPATCH START EVENT //
-		$UpCMS->dispatchEvent( new Event( UpCMS::LIST_BEFORE_GET, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::LIST_BEFORE_GET, NULL ) );
 		
 		// RELATION TABLE //
 		$direction = strtolower( @$_POST['direction'] );
@@ -236,7 +236,8 @@ class ApplicationList
 			$temp = "//table[@rel='".str_replace( ".", "']//field[@rel='", $relation )."']";
 			$temp = $UpCMS->config->xpath( $temp );
 			
-			$relPermission	= reset( explode( ".", $relation ) );
+			$a = explode( ".", $relation );
+			$relPermission	= reset( $a );
 			
 			$target = $temp[0];
 			$table = $prefix.$target["reltable"];
@@ -277,7 +278,7 @@ class ApplicationList
 		$name = $target["name"];
 		$mode = isset( $target["mode"] ) ? $target["mode"] : "normal";
 		
-		$t = NULL;
+		$t = new stdClass();
 		$t->name = "id";
 		$fields["id"] = $t;
 		$query = "SELECT u.id";
@@ -307,7 +308,7 @@ class ApplicationList
 				
 				if( (string) $n["quickedit"] == "enabled" and $t != "text" and $t != "html" and $t != "simplehtml" and $t != "switch" and (string) $k != "group" )
 				{
-					$f = NULL;
+					$f = new stdClass();
 					$f->type = $t;
 					$f->params = $p;
 					$f->name = (string) $n["name"];
@@ -384,6 +385,7 @@ class ApplicationList
 		
 		global $result;
 		
+		$result = new stdClass();
 		$result->list		= $List;
 		$result->fields		= $fields;
 		$result->permission	= $permission;
@@ -394,7 +396,7 @@ class ApplicationList
 		$result->rowsPerPage= (string) $rows;
 		$result->icon		= (string) $target["icon"];
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::LIST_AFTER_GET, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::LIST_AFTER_GET, NULL ) );
 	}
 	
 	/**

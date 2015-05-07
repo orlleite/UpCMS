@@ -27,7 +27,7 @@ foreach( $rows as $r => $row )
 	if( $activate != NULL )
 	{
 		PluginManager::setState( $r, $activate );
-		$result->setter = true;
+		$result->status = true;
 	}
 	
 	$delete = $_REQUEST["plugins_plugins_".$r."_delete"];
@@ -35,7 +35,7 @@ foreach( $rows as $r => $row )
 	{
 		PluginManager::uninstall( $r );
 		$result->status = true;
-		$result->setter = true;
+		$result->updater = true;
 	}
 }
 

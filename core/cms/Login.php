@@ -23,7 +23,7 @@ class ApplicationLogin
 	{
 		global $UpCMS, $result;
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::BEFORE_LOGIN, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::BEFORE_LOGIN, NULL ) );
 		
 		$result->status = User::login( addslashes( $_POST["username"] ), addslashes( $_POST["password"] ) );
 		
@@ -35,7 +35,7 @@ class ApplicationLogin
 			$result->id		= $user->info( "id" );
 		}
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::AFTER_LOGIN, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::AFTER_LOGIN, NULL ) );
 	}
 	
 	/**
@@ -49,9 +49,9 @@ class ApplicationLogin
 	{
 		global $UpCMS;
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::BEFORE_LOGOUT, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::BEFORE_LOGOUT, NULL ) );
 		User::logout();
-		$UpCMS->dispatchEvent( new Event( UpCMS::AFTER_LOGOUT, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::AFTER_LOGOUT, NULL ) );
 	}
 	
 	/**
@@ -65,7 +65,7 @@ class ApplicationLogin
 	{
 		global $UpCMS;
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::GET_INIT_SCRIPT, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::GET_INIT_SCRIPT, NULL ) );
 	}
 	
 	/**
@@ -79,10 +79,11 @@ class ApplicationLogin
 	{
 		global $UpCMS, $result;
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::BEFORE_LOGGED, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::BEFORE_LOGGED, NULL ) );
 		
 		if( $UpCMS->user )
 		{
+			$result = new stdClass();
 			$result->status = true;
 			$result->name	= $UpCMS->user->info( "displayname" );
 			$result->group	= $UpCMS->user->info( "group" );
@@ -93,7 +94,7 @@ class ApplicationLogin
 			$result->status = false;
 		}
 		
-		$UpCMS->dispatchEvent( new Event( UpCMS::AFTER_LOGGED, $this ) );
+		$UpCMS->dispatchEvent( new Event( UpCMS::AFTER_LOGGED, NULL ) );
 	}
 }
 

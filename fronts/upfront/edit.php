@@ -42,11 +42,11 @@ class ViewEdit
 		
 		foreach( $result->fields as $k => $value )
 		{
-			if( !$value->display ) unset( $value );
+			if( !@$value->display ) unset( $value );
 			else if( $value->type == "group" )
 				foreach( $value->fields as $a => $f )
 				{
-					if( !$f->display ) unset( $value->fields[$a] );
+					if( !@$f->display ) unset( $value->fields[$a] );
 				}
 		}
 		// print_r( $result );
