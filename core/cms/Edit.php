@@ -208,9 +208,9 @@ class ApplicationEdit
 				{
 					$tboxs .= $target[$i]["box"];
 					$box = $UpCMS->config->xpath( "//gui/box[@rel='".$n["box"]."']" );
-					$b->position	= (string) $box[0]["position"];
-					$b->name		= (string) $box[0]["name"];
-					$guis[(string)$box[0]["rel"]] = $b;
+					$b->position	= (string) $box[0]['position'];
+					$b->name		= (string) $box[0]['name'];
+					$guis[(string)$box[0]['rel']] = $b;
 				}
 			}
 			
@@ -430,9 +430,9 @@ class ApplicationEdit
 				{
 					$tboxs .= $n["box"];
 					$box = $UpCMS->config->xpath( "//gui/box[@rel='".$n["box"]."']" );
-					$b->position	= (string) $box[0]->position;
-					$b->name		= (string) $box[0]->name;
-					$guis[(string)$box[0]->rel] = $b;
+					$b->position	= (string) $box[0]['position'];
+					$b->name		= (string) $box[0]['name'];
+					$guis[(string)$box[0]['rel']] = $b;
 				}
 			}
 			
